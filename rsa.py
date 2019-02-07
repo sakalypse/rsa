@@ -6,7 +6,7 @@ def exponentiationModulaire(x,k,n):
 		r=ki%2
 		listeBinaire.append(int(r))
 		ki = (ki-r)/2
-	
+
 	#calcul des xi exposant 2 exposant i
 	listeX = []
 	for i in range(len(listeBinaire)):
@@ -20,7 +20,7 @@ def exponentiationModulaire(x,k,n):
 
 	#return l'application du modulo
 	return xk % n
-	
+
 def euclideEtendu(a,b):
 	r1, r2 = a,b
 	u1, v1 = 1,0
@@ -30,11 +30,11 @@ def euclideEtendu(a,b):
 		rBuffer = r1
 		uBuffer = u1
 		vBuffer = v1
-		
+
 		r1=r2
 		u1=u2
 		v1=v2
-		
+
 		r2 = rBuffer - q*r2
 		u2 = uBuffer - q*u2
 		v2 = vBuffer - q*v2
@@ -44,8 +44,21 @@ def inverseModulaire(a, N):
 	resultEuclide = euclideEtendu(a,N)
 	return resultEuclide[1]
 
-#genere c et d
+#return c et d
 def generationExposants(p,q):
-	
-	
-#inverseModulaire(120,23)
+	i=2
+	while euclideEtendu(i,(p-1)*(q-1))[0]!=1 or i <= ((p-1)*(q-1)):
+		i+=1
+	if i==((p-1)*(q-1)):
+		print("C non trouvé")
+		return
+	else:
+		c = i
+
+	d = inverseModulaire(c, (p-1)*(q-1))
+
+	print(c)
+	print(d)
+
+generationExposants(7307,5923)
+#print(inverseModulaire(7,10*16))

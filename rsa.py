@@ -91,39 +91,39 @@ def testDePrimalite(n):
 				return 0
 	return 1
 
-def chiffrement(m,phin,c):
+def chiffrement(m,n,c):
 	"""
 	retourne le message chiffré
 	params: m: le message à chiffré
-	params: phin: phi de n
+	params: n: p*q
 	params: c: l'entier premier avec phi de n
 	return: le message chiffré
 	"""
 	return exponentiationModulaire(m,c,n)
 
-def dechiffrement(mChiffre,phin,d):
+def dechiffrement(mChiffre,n,d):
 	"""
 	retourne le message déchiffré
 	params: mChiffre: le message à déchiffré
-	params: phin: phi de n
+	params: n: p*q
 	params: d: l’inverse modulaire de c modulo phi de n.
 	return: le message déchiffré
 	"""
 	return exponentiationModulaire(mChiffre,d,n)
 
 def mainTest():
-	p=3
-	q=11
+	p=7307
+	q=5923
 	n = p*q
 	phin = (p-1)*(q-1)
-	c = 3
+	c = 11
 	d = inverseModulaire(c,phin)
 	m = 4 #message
 	
 	print('c = ',c,' ; d = ',d)
-	mChiffre = chiffrement(m, phin, c)
+	mChiffre = chiffrement(m, n, c)
 	print('Message chiffré : ', mChiffre)
-	m = dechiffrement(mChiffre, phin, d)
+	m = dechiffrement(mChiffre, n, d)
 	print('Message déchiffré : ', m)
 	
 mainTest()

@@ -2,6 +2,13 @@ from math import *
 import random
 
 def exponentiationModulaire(x,k,n):
+	"""
+	retourne l'exponentiation Modulaire : x^k mod n
+	params: x: la valeur x
+	params: k: exposant de x
+	params: n: le modulo
+	return: l'exponentiation Modulaire
+	"""
 	#convertion de l'exposant k en écriture binaire
 	listeBinaire = []
 	ki=k
@@ -25,6 +32,15 @@ def exponentiationModulaire(x,k,n):
 	return xk % n
 
 def euclideEtendu(a,b):
+	"""
+	retourne l'euclideEtendu
+	params: a:
+	params: b:
+	return: r1:
+			u1:  
+			v1:
+			tel que r1 = u1 * a + v1 * b 
+	"""
 	r1, r2 = a,b
 	u1, v1 = 1,0
 	u2, v2 = 0,1
@@ -48,8 +64,13 @@ def inverseModulaire(a, N):
 	resultEuclide = euclideEtendu(a,N)
 	return resultEuclide[1]
 
-#retourne c et d
 def generationExposants(p,q):
+	"""
+	retourne c, nombre premier avec phi de n et d, inverse modulaire de c
+	params: p:
+	params: q:
+	return: c et d en tableau
+	"""
 	c = random.randint(3,(p-1)*(q-1)-1)
 	while (testDePrimalite(c)!=1 or euclideEtendu(c,(p-1)*(q-1))[0]!=1):
 		c = random.randint(3,(p-1)*(q-1)-1)	
@@ -57,6 +78,11 @@ def generationExposants(p,q):
 	return [c,d]
 
 def testDePrimalite(n):
+	"""
+	Retourne vrai en faux en testant si n est un nombre premier
+	params: n: nombre a tester
+	return: 1 ou 0 en fonction du test
+	"""
 	if n%2==0:
 		return 0
 	if 3<sqrt(n):
@@ -65,12 +91,24 @@ def testDePrimalite(n):
 				return 0
 	return 1
 
-#retourne le message chiffré
-def chiffrement(m,n,c):
+def chiffrement(m,phin,c):
+	"""
+	retourne le message chiffré
+	params: m: le message à chiffré
+	params: phin: phi de n
+	params: c: l'entier premier avec phi de n
+	return: le message chiffré
+	"""
 	return exponentiationModulaire(m,c,n)
 
-#retourne le message déchiffré
-def dechiffrement(mChiffre,n,d):
+def dechiffrement(mChiffre,phin,d):
+	"""
+	retourne le message déchiffré
+	params: mChiffre: le message à déchiffré
+	params: phin: phi de n
+	params: d: l’inverse modulaire de c modulo phi de n.
+	return: le message déchiffré
+	"""
 	return exponentiationModulaire(mChiffre,d,n)
 
 def mainTest():
@@ -83,9 +121,9 @@ def mainTest():
 	m = 4 #message
 	
 	print('c = ',c,' ; d = ',d)
-	mChiffre = chiffrement(m, n, c)
+	mChiffre = chiffrement(m, phin, c)
 	print('Message chiffré : ', mChiffre)
-	m = dechiffrement(mChiffre, n, d)
+	m = dechiffrement(mChiffre, phin, d)
 	print('Message déchiffré : ', m)
 	
 mainTest()

@@ -2,8 +2,8 @@ import math
 
 import MathUtils
 
-CORRESPONDANCE = '.ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-SIZE = len(CORRESPONDANCE)
+correspondance = '.ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+size = len(correspondance)
 
 def stringToInt(string):
     """
@@ -14,8 +14,8 @@ def stringToInt(string):
     number = 0
     for i in range(0, len(string)):
         c = string[i]
-        correspondanceIndex = CORRESPONDANCE.find(str.upper(c))
-        number += math.pow(SIZE, len(string) - 1 - i) * correspondanceIndex
+        correspondanceIndex = correspondance.find(str.upper(c))
+        number += math.pow(size, len(string) - 1 - i) * correspondanceIndex
     return int(number)
 	
 def intToString(number):
@@ -24,12 +24,12 @@ def intToString(number):
 	:param number: l'entier à convertir
 	:return str: la chaine de caractère convertie
 	"""
-	r=number%SIZE
-	q=int((number-r)/SIZE)
+	r=number%size
+	q=int((number-r)/size)
 	string = ""
-	while q%SIZE > 0:
-		string = CORRESPONDANCE[r] + string
-		r=q%SIZE
-		q=int((q-r)/SIZE)
-	string = CORRESPONDANCE[r] + string
+	while q%size > 0:
+		string = correspondance[r] + string
+		r=q%size
+		q=int((q-r)/size)
+	string = correspondance[r] + string
 	return string

@@ -17,8 +17,6 @@ def TrouverClePrivee(n, c):
 	return d
 	
 if __name__ == '__main__':
-	print(MathUtils.dechiffrement(106, 221, 1997))
-
 	n=int(input("entrez la valeur 'n' de votre cle publique: "))
 	c=int(input("entrez la valeur 'd' de votre cle publique: "))
 	
